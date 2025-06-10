@@ -1,0 +1,133 @@
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    .floating-menu {
+      opacity: 1;
+    }
+
+    .product-image {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.product-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.floating-menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.cart-button {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.product-info {
+  padding: 1rem;
+
+  .product-category {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    .stars {
+      display: flex;
+      gap: 0.1rem;
+
+      mat-icon {
+        font-size: 1rem;
+        color: #ddd;
+
+        &.filled {
+          color: #fbc02d;
+        }
+      }
+    }
+
+    .rating-count {
+      font-size: 0.8rem;
+      color: #999;
+    }
+  }
+
+  .product-price-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+
+    .current-price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #1e88e5;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+    }
+  }
+}

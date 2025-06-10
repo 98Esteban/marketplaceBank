@@ -1,0 +1,9 @@
+<form [formGroup]="searchForm" class="search-form">
+  <div class="search-input-container">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input type="text" formControlName="query" placeholder="Search products, categories..." class="search-input">
+    <button type="button" class="clear-button" *ngIf="searchForm.get('query')?.value" (click)="clearSearch()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</form>

@@ -1,0 +1,38 @@
+<div class="product-card" (click)="onProductClick()">
+  <div class="product-image-container">
+    <img [src]="product.image" [alt]="product.title" class="product-image" (error)="onImageError($event)">
+
+    <ng-container *ngIf="isInCart$ | async as isInCart">
+      <button mat-mini-fab [color]="isInCart ? 'warn' : 'primary'" (click)="onCartAction()"
+        [title]="isInCart ? 'Remove from cart' : 'Add to cart'" class="cart-button">
+        <mat-icon>
+          {{ isInCart ? 'remove_shopping_cart' : 'add_shopping_cart' }}
+        </mat-icon>
+      </button>
+    </ng-container>
+
+    <!-- Discount Badge -->
+    <div class="discount-badge" *ngIf="hasDiscount">
+      <span>-{{ discountPercentage }}%</span>
+    </div>
+  </div>
+
+  <div class="product-info">
+    <div class="product-category">{{ product.category | titlecase }}</div>
+    <h3 class="product-title">{{ product.title }}</h3>
+
+    <div class="product-rating" *ngIf="product.rating">
+      <div class="stars">
+        <mat-icon *ngFor="let star of getStarArray(product.rating.rate)" [class.filled]="star <= product.rating.rate">
+          star
+        </mat-icon>
+      </div>
+      <span class="rating-count">({{ product.rating.count }})</span>
+    </div>
+
+    <div class="product-price-container">
+      <span class="current-price">{{ product.price | currency }}</span>
+      <span class="original-price" *ngIf="hasDiscount">{{ originalPrice | currency }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.toolbar {
+  padding: 0 16px;
+}
+
+.store-title {
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart-button {
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.mat-badge-content {
+  font-size: 10px;
+}

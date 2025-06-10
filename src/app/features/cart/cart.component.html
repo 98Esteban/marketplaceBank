@@ -1,0 +1,72 @@
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>🛒 Shopping Cart</h1>
+    <div class="cart-actions" *ngIf="(cartItems$ | async)?.length">
+
+      <button mat-icon-button color="primary" (click)="exportExcel()" matTooltip="Exportar Excel">
+        <mat-icon>grid_on</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="clearCart()" matTooltip="Vaciar carrito">
+        <mat-icon>delete_sweep</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="cart-content" *ngIf="cartItems$ | async as items; else emptyCart">
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of items; trackBy: trackByProductId">
+        <img [src]="item.product.image" [alt]="item.product.title" class="item-image" />
+
+        <div class="item-details">
+          <h3>{{ item.product.title }}</h3>
+          <p class="item-category">{{ item.product.category }}</p>
+          <p class="item-price">{{ item.product.price | currency }}</p>
+        </div>
+
+        <div class="quantity-controls">
+          <button mat-mini-fab color="primary" (click)="decreaseQuantity(item.product.id, item.quantity)"
+            [disabled]="item.quantity <= 1">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <span class="quantity">{{ item.quantity }}</span>
+          <button mat-mini-fab color="primary" (click)="increaseQuantity(item.product.id, item.quantity)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <div class="item-total">
+          <p class="total-price">{{ item.product.price * item.quantity | currency }}</p>
+          <button mat-icon-button color="warn" (click)="removeItem(item.product.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <mat-card class="summary-card">
+        <h3>Order Summary</h3>
+        <div class="summary-line">
+          <span>Items:</span>
+          <strong>{{ getTotalItems(items) }}</strong>
+        </div>
+        <div class="summary-line total">
+          <span>Total:</span>
+          <strong>{{ totalPrice$ | async | currency }}</strong>
+        </div>
+        <button mat-raised-button color="accent" class="checkout-btn">
+          <mat-icon>credit_card</mat-icon> Checkout
+        </button>
+      </mat-card>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <mat-icon class="empty-icon">remove_shopping_cart</mat-icon>
+      <h2>Your cart is empty</h2>
+      <p>Add some products to get started</p>
+      <button mat-raised-button color="primary" routerLink="/">Continue Shopping</button>
+    </div>
+  </ng-template>
+</div>
